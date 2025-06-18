@@ -11,6 +11,28 @@ TYPE
 	RwData_typ : 	STRUCT 
 		nData : ARRAY[0..49]OF INT;
 	END_STRUCT;
+	CharMD_Typ : 	STRUCT 
+		TxFunCode : BYTE;
+		TxRegNum : UINT;
+		TxData_Set : UDINT;
+		RxFunCode : USINT;
+		RxRegNum : UINT;
+		RxData_Set : UDINT;
+	END_STRUCT;
+	CharSys_Typ : 	STRUCT 
+	END_STRUCT;
+	CahrHMI_Typ : 	STRUCT 
+	END_STRUCT;
+	CharBat_Tye : 	STRUCT 
+	END_STRUCT;
+	CharCANChA_TX : 	STRUCT 
+	END_STRUCT;
+	CharCANChB_RX : 	STRUCT 
+	END_STRUCT;
+	CharCANChA_RX : 	STRUCT 
+	END_STRUCT;
+	CharCANChB_TX : 	STRUCT 
+	END_STRUCT;
 	gIO_typ : 	STRUCT 
 		ST3_DI9372 : DI9372_typ;
 		ST4_DO8322 : DO8322_typ;

@@ -40,22 +40,22 @@ PROGRAM _CYCLIC
 			ArCanSender.step	:= STEP_INIT_SEND_FRAME;
 		END_IF
 	END_IF
-	
+	//	ArCanSender.ArCanSend_0.Frame.Data[0]	:= UINT_TO_BYTE(PMS.BSA_Volt_Total AND 16#FF );	
+	//	ArCanSender.ArCanSend_0.Frame.Data[1]	:= UINT_TO_BYTE(SHR(PMS.BSA_Volt_Total, 8));
 	
 	(***********************************************************)
 	(* Customize the sending data *)
-
 	CASE step OF
 		0:
-			ArCanSender.ID							:= 16#701;
-			ArCanSender.ArCanSend_0.Frame.Data[0]	:= 10;
-			ArCanSender.ArCanSend_0.Frame.Data[1]	:= 00;
-			ArCanSender.ArCanSend_0.Frame.Data[2]	:= 00;
-			ArCanSender.ArCanSend_0.Frame.Data[3]	:= 40;
-			ArCanSender.ArCanSend_0.Frame.Data[4]	:= 00;
-			ArCanSender.ArCanSend_0.Frame.Data[5]	:= 00;			
-			ArCanSender.ArCanSend_0.Frame.Data[6]	:= 00;
-			ArCanSender.ArCanSend_0.Frame.Data[7]	:= 00;	
+			ArCanSender.ID							:= 16#06080000;
+			ArCanSender.ArCanSend_0.Frame.Data[0]	:= CharMD0.TxFunCode;
+			ArCanSender.ArCanSend_0.Frame.Data[1]	:= 0;
+			ArCanSender.ArCanSend_0.Frame.Data[2]	:= UINT_TO_BYTE(CharMD0.TxRegNum AND 16#FF );
+			ArCanSender.ArCanSend_0.Frame.Data[3]	:= UINT_TO_BYTE(SHR(CharMD0.TxRegNum, 8));
+			ArCanSender.ArCanSend_0.Frame.Data[4]	:= UDINT_TO_BYTE(CharMD0.TxData_Set AND 16#000000FF);
+			ArCanSender.ArCanSend_0.Frame.Data[5]	:= UDINT_TO_BYTE(SHR(CharMD0.TxData_Set, 8));			
+			ArCanSender.ArCanSend_0.Frame.Data[6]	:= UDINT_TO_BYTE(SHR(CharMD0.TxData_Set, 16));
+			ArCanSender.ArCanSend_0.Frame.Data[7]	:= UDINT_TO_BYTE(SHR(CharMD0.TxData_Set, 32));	
 			
 //		1: 	
 //			ArCanSender.ID							:= 16#06080800;

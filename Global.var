@@ -38,4 +38,7 @@ VAR
 	Sys : SysBMS_Typ;
 	Can : ARRAY[0..9] OF CanData;
 	Can1 : ARRAY[0..9] OF Can1Data;
+	New_Variable : USINT;
+	CharMD0 : CharMD_Typ;
+	CharMD1 : CharMD_Typ;
 END_VAR
