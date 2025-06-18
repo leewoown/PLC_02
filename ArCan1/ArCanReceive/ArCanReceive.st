@@ -1,10 +1,11 @@
 
+// CAN_CH_B
 
 PROGRAM _INIT
 	RackSyS;
 	ActArCanReceiver;
 	ArCanReceiver.enable				:= TRUE;
-	ArCanReceiver.receiverDeviceName 	:= 'IF7';       (* for X20CP0482 CPU *)
+	ArCanReceiver.receiverDeviceName 	:= 'IF6.ST1.IF1';       (* for X20CP0482 CPU *)
 	ArCanReceiver.id					:= 0; 
 	ArCanReceiver.idMask				:= arCAN_RECEIVE_ALL;  // or configure IDMask
 	ArCanReceiver.format				:= arCAN_11BIT;  // or arCAN_29BIT

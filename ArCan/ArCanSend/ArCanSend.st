@@ -1,10 +1,12 @@
 
+// CAN_CH_A
+
 PROGRAM _INIT
 	
 	ArCanSender.enable				:= TRUE;
 	
 	(* CAN parameter configuration *)
-	ArCanSender.senderDeviceName 	:= 'IF6.ST1.IF1';       (* for X20CP0482 CPU *)
+	ArCanSender.senderDeviceName 	:= 'IF7';       (* for X20CP0482 CPU *)
 //	ArCanSender.senderDeviceName 	:= 'IF1.ST2.IF1.ST2.IF1';		(* for C50 Touch Panel + X20CS2770 *)
 	ArCanSender.Baudrate			:= 125000;		(* Set to 500 000 bit/s *)		
 	
@@ -29,6 +31,7 @@ END_PROGRAM
 
 PROGRAM _CYCLIC	
     
+
 	timerCount				:= timerCount + 1;
 	IF timerCount >= 2 THEN     // ( cycle time x 5 ) = time for step change (2ms x 5 = 10ms)
 		timerCount	:= 0;
@@ -41,44 +44,36 @@ PROGRAM _CYCLIC
 		END_IF
 	END_IF
 	
-	
 	(***********************************************************)
 	(* Customize the sending data *)
 
 	CASE step OF
 		0:
 			ArCanSender.ID							:= 16#06080000;
-			ArCanSender.ArCanSend_0.Frame.Data[0]	:= 10;
-			ArCanSender.ArCanSend_0.Frame.Data[1]	:= 00;
-			ArCanSender.ArCanSend_0.Frame.Data[2]	:= 00;
-			ArCanSender.ArCanSend_0.Frame.Data[3]	:= 40;
-			ArCanSender.ArCanSend_0.Frame.Data[4]	:= 00;
-			ArCanSender.ArCanSend_0.Frame.Data[5]	:= 00;			
-			ArCanSender.ArCanSend_0.Frame.Data[6]	:= 00;
-			ArCanSender.ArCanSend_0.Frame.Data[7]	:= 00;	
-			
-		1: 	
+			ArCanSender.ArCanSend_0.Frame.Data[0]	:= CharMD0.TxFunCode;
+			ArCanSender.ArCanSend_0.Frame.Data[1]	:= 0;
+			ArCanSender.ArCanSend_0.Frame.Data[2]	:= UINT_TO_BYTE(SHR(CharMD0.TxRegNum, 8));
+			ArCanSender.ArCanSend_0.Frame.Data[3]	:= UINT_TO_BYTE(CharMD0.TxRegNum AND 16#FF );
+			ArCanSender.ArCanSend_0.Frame.Data[4]	:= UDINT_TO_BYTE(SHR(CharMD0.TxData_Set, 24));
+			ArCanSender.ArCanSend_0.Frame.Data[5]	:= UDINT_TO_BYTE(SHR(CharMD0.TxData_Set, 16));			
+			ArCanSender.ArCanSend_0.Frame.Data[6]	:= UDINT_TO_BYTE(SHR(CharMD0.TxData_Set, 8));
+		    ArCanSender.ArCanSend_0.Frame.Data[7]	:= UDINT_TO_BYTE(CharMD0.TxData_Set AND 16#000000FF);		
+		
+		1:
 			ArCanSender.ID							:= 16#06080800;
-			ArCanSender.ArCanSend_0.Frame.Data[0]	:= 10;
-			ArCanSender.ArCanSend_0.Frame.Data[1]	:= 00;
-			ArCanSender.ArCanSend_0.Frame.Data[2]	:= 00;
-			ArCanSender.ArCanSend_0.Frame.Data[3]	:= 40;
-			ArCanSender.ArCanSend_0.Frame.Data[4]	:= 00;
-			ArCanSender.ArCanSend_0.Frame.Data[5]	:= 00;			
-			ArCanSender.ArCanSend_0.Frame.Data[6]	:= 00;
-			ArCanSender.ArCanSend_0.Frame.Data[7]	:= 00;	
+			ArCanSender.ArCanSend_0.Frame.Data[0]	:= CharMD1.TxFunCode;
+			ArCanSender.ArCanSend_0.Frame.Data[1]	:= 0;
+			ArCanSender.ArCanSend_0.Frame.Data[2]	:= UINT_TO_BYTE(SHR(CharMD1.TxRegNum, 8));
+			ArCanSender.ArCanSend_0.Frame.Data[3]	:= UINT_TO_BYTE	(CharMD1.TxRegNum AND 16#FF );
+			ArCanSender.ArCanSend_0.Frame.Data[4]	:= UDINT_TO_BYTE(SHR(CharMD1.TxData_Set, 24));
+			ArCanSender.ArCanSend_0.Frame.Data[5]	:= UDINT_TO_BYTE(SHR(CharMD1.TxData_Set, 16));			
+			ArCanSender.ArCanSend_0.Frame.Data[6]	:= UDINT_TO_BYTE(SHR(CharMD1.TxData_Set, 8)); 
+			ArCanSender.ArCanSend_0.Frame.Data[7]	:= UDINT_TO_BYTE(CharMD1.TxData_Set AND 16#000000FF);		
 			
-//		2: 	
-//			ArCanSender.ID							:= 16#13;
-//			ArCanSender.ArCanSend_0.Frame.Data[0]	:= 3;
-//			ArCanSender.ArCanSend_0.Frame.Data[1]	:= 3;
-//			ArCanSender.ArCanSend_0.Frame.Data[2]	:= 3;
-		
-		
 	END_CASE
 	
 	(***********************************************************)
-	
+		
 				
 	IF (ArCanSender.successCount <> successCountOld) THEN
 		successCountOld						:= ArCanSender.successCount;

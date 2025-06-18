@@ -1,10 +1,12 @@
 
+// CAN_CH_B
+
 PROGRAM _INIT
 	
 	ArCanSender.enable				:= TRUE;
 	
 	(* CAN parameter configuration *)
-	ArCanSender.senderDeviceName 	:= 'IF7';       (* for X20CP0482 CPU *)
+	ArCanSender.senderDeviceName 	:= 'IF6.ST1.IF1';       (* for X20CP0482 CPU *)
 //	ArCanSender.senderDeviceName 	:= 'IF1.ST2.IF1.ST2.IF1';		(* for C50 Touch Panel + X20CS2770 *)
 	ArCanSender.Baudrate			:= 500000;		(* Set to 500 000 bit/s *)		
 	
@@ -45,17 +47,18 @@ PROGRAM _CYCLIC
 	
 	(***********************************************************)
 	(* Customize the sending data *)
+	
 	CASE step OF
-		0:
-			ArCanSender.ID							:= 16#06080000;
-			ArCanSender.ArCanSend_0.Frame.Data[0]	:= CharMD0.TxFunCode;
-			ArCanSender.ArCanSend_0.Frame.Data[1]	:= 0;
-			ArCanSender.ArCanSend_0.Frame.Data[2]	:= UINT_TO_BYTE(CharMD0.TxRegNum AND 16#FF );
-			ArCanSender.ArCanSend_0.Frame.Data[3]	:= UINT_TO_BYTE(SHR(CharMD0.TxRegNum, 8));
-			ArCanSender.ArCanSend_0.Frame.Data[4]	:= UDINT_TO_BYTE(CharMD0.TxData_Set AND 16#000000FF);
-			ArCanSender.ArCanSend_0.Frame.Data[5]	:= UDINT_TO_BYTE(SHR(CharMD0.TxData_Set, 8));			
-			ArCanSender.ArCanSend_0.Frame.Data[6]	:= UDINT_TO_BYTE(SHR(CharMD0.TxData_Set, 16));
-			ArCanSender.ArCanSend_0.Frame.Data[7]	:= UDINT_TO_BYTE(SHR(CharMD0.TxData_Set, 32));	
+//		0:
+//			ArCanSender.ID							:= 16#06080000;
+//			ArCanSender.ArCanSend_0.Frame.Data[0]	:= CharMD0.TxFunCode;
+//			ArCanSender.ArCanSend_0.Frame.Data[1]	:= 0;
+//			ArCanSender.ArCanSend_0.Frame.Data[2]	:= UINT_TO_BYTE(CharMD0.TxRegNum AND 16#FF );
+//			ArCanSender.ArCanSend_0.Frame.Data[3]	:= UINT_TO_BYTE(SHR(CharMD0.TxRegNum, 8));
+//			ArCanSender.ArCanSend_0.Frame.Data[4]	:= UDINT_TO_BYTE(CharMD0.TxData_Set AND 16#000000FF);
+//			ArCanSender.ArCanSend_0.Frame.Data[5]	:= UDINT_TO_BYTE(SHR(CharMD0.TxData_Set, 8));			
+//			ArCanSender.ArCanSend_0.Frame.Data[6]	:= UDINT_TO_BYTE(SHR(CharMD0.TxData_Set, 16));
+//			ArCanSender.ArCanSend_0.Frame.Data[7]	:= UDINT_TO_BYTE(SHR(CharMD0.TxData_Set, 32));	
 			
 //		1: 	
 //			ArCanSender.ID							:= 16#06080800;

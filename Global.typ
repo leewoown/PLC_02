@@ -15,9 +15,10 @@ TYPE
 		TxFunCode : BYTE;
 		TxRegNum : UINT;
 		TxData_Set : UDINT;
-		RxFunCode : USINT;
+		RxFunCode : UINT;
 		RxRegNum : UINT;
 		RxData_Set : UDINT;
+		RXInfroArray : ARRAY[0..10]OF UINT;
 	END_STRUCT;
 	CharSys_Typ : 	STRUCT 
 	END_STRUCT;

@@ -1,10 +1,11 @@
 
+// CAN_CH_A
 
 PROGRAM _INIT
 	RackSyS;
 	ActArCanReceiver;
 	ArCanReceiver.enable				:= TRUE;
-	ArCanReceiver.receiverDeviceName 	:= 'IF6.ST1.IF1';       (* for X20CP0482 CPU *)
+	ArCanReceiver.receiverDeviceName 	:= 'IF7';       (* for X20CP0482 CPU *)
 	ArCanReceiver.id					:= 0; 
 	ArCanReceiver.idMask				:= arCAN_RECEIVE_ALL;  // or configure IDMask
 	ArCanReceiver.format				:= arCAN_29BIT;  // or arCAN_29BIT
@@ -43,32 +44,29 @@ PROGRAM _CYCLIC
 			16#06080000..16#06080008:
 			Can[0].Count := Can[0].Count +1;
 			IF  Can[0].Count	>=3600 THEN
-				Can[0].Count :=0;
-				
+				Can[0].Count :=0;				
 			END_IF;
-			Can[1].Count := Can[1].Count +1;
-			IF  Can[1].Count	>=3600 THEN
-				Can[1].Count :=0;
-			END_IF;			
 			
 			IF ArCanReceiver.ArCanReceiver_0.ReceivedFrame.ID = 16#06080000 THEN
-				Can[0].CanInfoArry[0]   := SHL(BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[1]),8)OR BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[0]);	
-				Can[0].CanInfoArry[1] 	:= SHL(BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[3]),8)OR BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[2]);
-				Can[0].CanInfoArry[2] 	:= SHL(BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[5]),8)OR BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[4]);
-				Can[0].CanInfoArry[3]	:= SHL(BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[7]),8)OR BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[6]);
+				CharMD0.RXInfroArray[0] 	:= SHL(BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[0]),8)OR BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[1]);	
+				CharMD0.RXInfroArray[1] 	:= SHL(BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[2]),8)OR BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[3]);
+				CharMD0.RXInfroArray[2]  	:= SHL(BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[4]),8)OR BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[5]);
+				CharMD0.RXInfroArray[3] 	:= SHL(BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[6]),8)OR BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[7]);
 			END_IF;
 			IF ArCanReceiver.ArCanReceiver_0.ReceivedFrame.ID = 16#06080008 THEN
-				Can[1].CanInfoArry[0]   := SHL(BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[1]),8)OR BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[0]);	
-				Can[1].CanInfoArry[1] 	:= SHL(BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[3]),8)OR BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[2]);
-				Can[1].CanInfoArry[2] 	:= SHL(BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[5]),8)OR BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[4]);
-				Can[1].CanInfoArry[3]	:= SHL(BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[7]),8)OR BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[6]);
+				CharMD1.RXInfroArray[0]		:= SHL(BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[0]),8)OR BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[1]);	
+				CharMD1.RXInfroArray[1] 	:= SHL(BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[2]),8)OR BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[3]);
+				CharMD1.RXInfroArray[2] 	:= SHL(BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[4]),8)OR BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[5]);
+				CharMD1.RXInfroArray[3]		:= SHL(BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[6]),8)OR BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[7]);
 			END_IF;	
-//			16#06080000..16#06080008:
-//			RackSyS[1].RackCanCount := RackSyS[1].RackCanCount +1;
-//			16#620..16#62E:
-//			RackSyS[2].RackCanCount := RackSyS[2].RackCanCount +1;
-//			16#630..16#63E:
-//			RackSyS[3].RackCanCount := RackSyS[3].RackCanCount +1;
+			
+		
+			//			16#06080000..16#06080008:
+			//			RackSyS[1].RackCanCount := RackSyS[1].RackCanCount +1;
+			//			16#620..16#62E:
+			//			RackSyS[2].RackCanCount := RackSyS[2].RackCanCount +1;
+			//			16#630..16#63E:
+			//			RackSyS[3].RackCanCount := RackSyS[3].RackCanCount +1;
 			//Can_DB_Key.Header	:=  UDINT_TO_USINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.ID - 16#600)/16;
 			//Can_DB_Key.Body		:= 	UDINT_TO_USINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.ID - 16#600)-Can_DB_Key.Header*16;
 			// memcpy(ADR(Can_Data[Can_DB_Key.Header].r6N[Can_DB_Key.Body]),ADR(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data),8);			
