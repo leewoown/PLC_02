@@ -32,6 +32,7 @@ END_PROGRAM
 PROGRAM _CYCLIC	
 //	RackSyS[0].RackIro
 	(* Action for ArCanReceiver *)
+	// test;
 	ActArCanReceiver;
 	(***********************************************************)
 	(* Customize the received data *)
