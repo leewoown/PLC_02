@@ -1,0 +1,41 @@
+(*CONSTANT*)
+VAR CONSTANT
+	PASSWORD : STRING[16] := '1234';
+	BATTERY_NUM : USINT := 4;
+	BATTERY_NUM_MINUS_1 : USINT := BATTERY_NUM-1;
+	ALARM_NUMBER : USINT := 18;
+	ALARM_NUMBER_MINUS_1 : USINT := ALARM_NUMBER-1;
+	BRAPrdInfr : USINT := 0; (*BSA_SW_Ver, BSA_Serial*)
+	BRABatconfig : USINT := 1; (*BSA_Serial, BSA_Parallel*)
+	BRANorVoltage : USINT := 2;
+	BRACapacity : USINT := 3;
+	BRAPT : USINT := 4;
+	BRACT : USINT := 5;
+	BRASOC : USINT := 6;
+	BRASOH : USINT := 7;
+	BRAStatus : USINT := 9;
+	BRAState : USINT := 10;
+	BRAAlarmbit : USINT := 11;
+	BRAFaultmbit : USINT := 12;
+	BRAProtect_Abit : USINT := 12;
+	BRAProtect_Bbit : USINT := 12;
+END_VAR
+(*GLOVAL VARIABLE*)
+VAR
+	gIO : gIO_typ;
+	gComm : gComm_typ;
+	gSignalCheck : gSignalCheckType;
+END_VAR
+(*ALARM DATABASE*)
+VAR RETAIN
+	AlarmDB : AlarmDB_typ;
+END_VAR
+VAR
+	RackSyS : ARRAY[0..9] OF RackSySDate;
+	HMI : HMI_typ;
+	HMIBinding : HMIBinding_typ;
+	PMS : PMS_typ;
+	Sys : SysBMS_Typ;
+	Can : ARRAY[0..9] OF CanData;
+	Can1 : ARRAY[0..9] OF Can1Data;
+END_VAR

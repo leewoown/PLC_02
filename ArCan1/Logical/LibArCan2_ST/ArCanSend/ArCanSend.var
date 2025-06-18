@@ -1,0 +1,3 @@
+VAR
+	ArCanSender : ArCanSend_typ;
+END_VAR

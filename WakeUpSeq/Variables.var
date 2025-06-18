@@ -1,0 +1,4 @@
+VAR
+	StateRack1 : UINT;
+	WakeUpSig : BOOL;
+END_VAR

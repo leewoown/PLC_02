@@ -1,0 +1,7 @@
+VAR
+	WakeUpSig : BOOL;
+	StateMa : UINT;
+	PRATimerProRlyOff : TON;
+	PRATimerProRlyOn : TON;
+	PRATimerWakeUpOff : TON;
+END_VAR

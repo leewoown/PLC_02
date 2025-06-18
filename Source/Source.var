@@ -1,0 +1,9 @@
+(*Battert Numder*)
+VAR CONSTANT
+	BATTERY_NUM : USINT := 4;
+	BATTERY_NUM_MINUS_ONE : USINT := BATTERY_NUM-1;
+END_VAR
+(*Battery Type*)
+VAR
+	gCtrl : USINT;
+END_VAR

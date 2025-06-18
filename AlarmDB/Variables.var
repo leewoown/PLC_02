@@ -1,0 +1,3 @@
+VAR
+	Timestamp : TimeType;
+END_VAR
