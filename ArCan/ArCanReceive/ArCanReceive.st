@@ -48,17 +48,29 @@ PROGRAM _CYCLIC
 			END_IF;
 			
 			IF ArCanReceiver.ArCanReceiver_0.ReceivedFrame.ID = 16#06080000 THEN
-				CharMD0.RXInfroArray[0] 	:= SHL(BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[0]),8)OR BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[1]);	
-				CharMD0.RXInfroArray[1] 	:= SHL(BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[2]),8)OR BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[3]);
-				CharMD0.RXInfroArray[2]  	:= SHL(BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[4]),8)OR BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[5]);
-				CharMD0.RXInfroArray[3] 	:= SHL(BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[6]),8)OR BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[7]);
+				CharMD0.RXInfroArray[0] 	:= ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[0];
+				CharMD0.RXInfroArray[1] 	:= ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[1];
+				CharMD0.RXInfroArray[2] 	:= ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[2];
+				CharMD0.RXInfroArray[3] 	:= ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[3];
+				CharMD0.RXInfroArray[4] 	:= ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[4];
+				CharMD0.RXInfroArray[5] 	:= ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[5];
+				CharMD0.RXInfroArray[6] 	:= ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[6];
+				CharMD0.RXInfroArray[7] 	:= ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[7];						
+				
+//				CharMD0.RXInfroArray[0] 	:= SHL(BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[0]),8)OR BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[1]);	
+//				CharMD0.RXInfroArray[1] 	:= SHL(BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[2]),8)OR BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[3]);
+//				CharMD0.RXInfroArray[2]  	:= SHL(BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[4]),8)OR BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[5]);
+//				CharMD0.RXInfroArray[3] 	:= SHL(BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[6]),8)OR BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[7]);
+				
+				
+				
 			END_IF;
-			IF ArCanReceiver.ArCanReceiver_0.ReceivedFrame.ID = 16#06080008 THEN
-				CharMD1.RXInfroArray[0]		:= SHL(BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[0]),8)OR BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[1]);	
-				CharMD1.RXInfroArray[1] 	:= SHL(BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[2]),8)OR BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[3]);
-				CharMD1.RXInfroArray[2] 	:= SHL(BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[4]),8)OR BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[5]);
-				CharMD1.RXInfroArray[3]		:= SHL(BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[6]),8)OR BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[7]);
-			END_IF;	
+//			IF ArCanReceiver.ArCanReceiver_0.ReceivedFrame.ID = 16#06080008 THEN
+//				CharMD1.RXInfroArray[0]		:= SHL(BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[0]),8)OR BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[1]);	
+//				CharMD1.RXInfroArray[1] 	:= SHL(BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[2]),8)OR BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[3]);
+//				CharMD1.RXInfroArray[2] 	:= SHL(BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[4]),8)OR BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[5]);
+//	 		CharMD1.RXInfroArray[3]		:= SHL(BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[6]),8)OR BYTE_TO_UINT(ArCanReceiver.ArCanReceiver_0.ReceivedFrame.Data[7]);
+//			END_IF;	
 			
 		
 			//			16#06080000..16#06080008:

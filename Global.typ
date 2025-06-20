@@ -12,13 +12,26 @@ TYPE
 		nData : ARRAY[0..49]OF INT;
 	END_STRUCT;
 	CharMD_Typ : 	STRUCT 
+		RXInfroArray : ARRAY[0..10]OF BYTE;
+		RxFunCode : BYTE;
+		RxRegNum : UINT;
+		RxData_Set : REAL;
+		RxfloatVal : REAL;
+		RxlongVal : DINT;
+		RxByteArray : ARRAY[0..3]OF BYTE;
+		RxByte0 : BYTE;
+		RxByte1 : BYTE;
+		RxByte2 : BYTE;
+		RXByte3 : BYTE;
 		TxFunCode : BYTE;
 		TxRegNum : UINT;
-		TxData_Set : UDINT;
-		RxFunCode : UINT;
-		RxRegNum : UINT;
-		RxData_Set : UDINT;
-		RXInfroArray : ARRAY[0..10]OF UINT;
+		TxData_Set : DINT;
+		TxfloatVal : REAL;
+		TxlongVal : DINT;
+		TxByte0 : BYTE;
+		TxByte1 : BYTE;
+		TxByte2 : BYTE;
+		TxByte3 : BYTE;
 	END_STRUCT;
 	CharSys_Typ : 	STRUCT 
 	END_STRUCT;

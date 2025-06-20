@@ -15,6 +15,7 @@
     <Object Type="Program" Language="IEC">AlarmDB</Object>
     <Object Type="Program" Language="IEC">HMI</Object>
     <Object Type="Program" Language="IEC">CANRxParaHandle</Object>
+    <Object Type="Program" Language="IEC">CANTxParaHandle</Object>
     <Object Type="Program" Language="IEC">DIOHandle</Object>
     <Object Type="Program" Language="IEC">PRAHandle</Object>
     <Object Type="Program" Language="IEC">WakeUpSeq</Object>
